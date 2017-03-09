@@ -1,5 +1,7 @@
 package algos;
 
+// TODO: The stream needs to be as long as the message. Repeatedly cycle through state until it's long enough.
+
 public class RC4 {
 
     private static byte[] ksa(byte[] key) {
@@ -54,7 +56,7 @@ public class RC4 {
     public static void main(String[] args) {
         String key = "supersecretkey";
         byte[] state = ksa(key.getBytes());
-        byte stream[] = prga(state);
+        byte[] stream = prga(state);
 
         String message = "hello, world!";
         System.out.println("Message: " + message);
