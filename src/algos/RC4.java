@@ -22,7 +22,7 @@ public class RC4 {
     private static byte[] prga(byte[] state) {
         int i = 0, j = 0;
         byte[] output = new byte[1024];
-        for (int x = 0; x < state.length; ++x) {
+        for (int x = 0; x < output.length; ++x) {
             i = (i + 1) & 0xFF;
             j = (j + state[i]) & 0xFF;
 
