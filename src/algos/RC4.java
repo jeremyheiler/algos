@@ -47,24 +47,32 @@ public class RC4 {
 
     private static String bytesToHex(byte[] bytes) {
         StringBuilder buf = new StringBuilder();
+        int col = 0;
         for (byte b : bytes) {
+            if (col % 16 == 0) {
+                buf.append("\n");
+            }
             buf.append(String.format("%02X", b));
+            ++col;
         }
-        return buf.toString();
+        return buf.append("\n").toString();
     }
 
     public static void main(String[] args) {
         String key = "supersecretkey";
         byte[] state = ksa(key.getBytes());
-        byte[] stream = prga(state);
+        System.out.println("KSA:" + bytesToHex(state));
 
-        String message = "hello, world!";
-        System.out.println("Message: " + message);
+        byte[] stream = prga(state);
+        System.out.println("PRGA:" + bytesToHex(stream));
+
+        String message = "hello, world! how are you?";
+        System.out.println("Message:\n" + message);
 
         byte[] encrypted = run(stream, message.getBytes());
-        System.out.println("Encrypted Message: " + bytesToHex(encrypted));
+        System.out.println("\nEncrypted Message:" + bytesToHex(encrypted));
 
         byte[] decrypted = run(stream, encrypted);
-        System.out.println("Decrypted Message: " + new String(decrypted));
+        System.out.println("Decrypted Message:\n" + new String(decrypted));
     }
 }
