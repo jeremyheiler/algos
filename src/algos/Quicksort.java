@@ -40,12 +40,8 @@ public class Quicksort {
         private int partition(int[] array, int lo, int hi) {
             int pivot = array[lo], i = lo - 1, j = hi + 1;
             for (;;) {
-                do {
-                    ++i;
-                } while (array[i] < pivot);
-                do {
-                    --j;
-                } while (array[j] > pivot);
+                while (array[++i] < pivot);
+                while (array[--j] > pivot);
                 if (i >= j) {
                     return j;
                 }
